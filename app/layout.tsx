@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+
+import { ModalProvider } from "@/providers/modal-provider";
+
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-	title: "Admin Dashboard",
-	description: "Ecommerce Admin Dashboard",
+	title: "Panel de Administración",
+	description: "Panel de administación para tienda en línea.",
 };
 
 export default function RootLayout({
@@ -15,8 +18,11 @@ export default function RootLayout({
 	children: React.ReactNode;
 }) {
 	return (
-		<html lang="en">
-			<body className={inter.className}>{children}</body>
+		<html lang="es">
+			<body className={inter.className}>
+				<ModalProvider />
+				{children}
+			</body>
 		</html>
 	);
 }
