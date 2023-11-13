@@ -18,7 +18,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 const formSchema = z.object({
-	name: z.string().min(1, { message: "Escribe el nombre de la tienda" }),
+	name: z.string().min(1, { message: "El nombre de la tienda es obligatorio" }),
 });
 
 const StoreModal = () => {
