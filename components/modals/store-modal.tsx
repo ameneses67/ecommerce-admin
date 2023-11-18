@@ -53,7 +53,7 @@ const StoreModal = () => {
 	return (
 		<Modal
 			title="Crear tienda"
-			description="Crear una nueva tienda para administrar sus propios productos y categorías"
+			description="Para poder comenzar debes crear una tienda primero."
 			isOpen={storeModal.isOpen}
 			onClose={storeModal.onClose}
 		>
