@@ -20,8 +20,8 @@ export function MainNav({
 		},
 		{
 			href: `/${params.storeId}/carteleras`,
-			label: "Cartelera",
-			active: pathname === `/${params.storeId}/cartelera`,
+			label: "Carteleras",
+			active: pathname === `/${params.storeId}/carteleras`,
 		},
 		{
 			href: `/${params.storeId}/configuracion`,

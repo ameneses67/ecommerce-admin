@@ -29,8 +29,8 @@ export const AlertModal: React.FC<AlertModalProps> = ({
 
 	return (
 		<Modal
-			title="Elminar tienda"
-			description="¿Estás seguro? Esta acción no se puede deshacer."
+			title="¿Estás seguro?"
+			description="Esta acción no se puede deshacer."
 			isOpen={isOpen}
 			onClose={onClose}
 		>

@@ -61,10 +61,10 @@ export async function POST(
 
 export async function GET(
 	req: Request,
-	{ params }: { params: { storedId: string } }
+	{ params }: { params: { storeId: string } }
 ) {
 	try {
-		if (!params.storedId) {
+		if (!params.storeId) {
 			return new NextResponse("El ID de la tienda es requerido", {
 				status: 400,
 			});
@@ -72,7 +72,7 @@ export async function GET(
 
 		const billboards = await prismadb.billboard.findMany({
 			where: {
-				storeId: params.storedId,
+				storeId: params.storeId,
 			},
 		});
 

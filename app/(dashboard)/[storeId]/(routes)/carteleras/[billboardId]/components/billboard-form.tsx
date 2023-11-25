@@ -1,6 +1,6 @@
 "use client";
 
-import { Trash } from "lucide-react";
+import { Trash2 } from "lucide-react";
 import { Billboard } from "@prisma/client";
 import { z } from "zod";
 import { useState } from "react";
@@ -10,7 +10,6 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import { useParams, useRouter } from "next/navigation";
 
-import { useOrigin } from "@/hooks/use-origin";
 import { AlertModal } from "@/components/modals/alert-modal";
 import { Heading } from "@/components/ui/heading";
 import { Button } from "@/components/ui/button";
@@ -24,7 +23,6 @@ import {
 	FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { ApiAlert } from "@/components/ui/api-alert";
 import ImageUpload from "@/components/ui/image-upload";
 
 const formSchema = z.object({
@@ -47,10 +45,9 @@ export const BillboardForm: React.FC<BillboardFormProps> = ({
 }) => {
 	const params = useParams();
 	const router = useRouter();
-	const origin = useOrigin();
 
 	const [open, setOpen] = useState(false);
-	const [loading, setLoding] = useState(false);
+	const [loading, setLoading] = useState(false);
 
 	const title = initialData ? "Editar cartelera" : "Crear cartelera";
 	const description = initialData
@@ -71,7 +68,7 @@ export const BillboardForm: React.FC<BillboardFormProps> = ({
 
 	const onSubmit = async (data: BillboardFormValues) => {
 		try {
-			setLoding(true);
+			setLoading(true);
 			if (initialData) {
 				await axios.patch(
 					`/api/${params.storeId}/carteleras/${params.billboardId}`,
@@ -80,30 +77,29 @@ export const BillboardForm: React.FC<BillboardFormProps> = ({
 			} else {
 				await axios.post(`/api/${params.storeId}/carteleras`, data);
 			}
-			router.refresh();
 			router.push(`/${params.storeId}/carteleras`);
+			router.refresh();
 			toast.success(toastMessage);
 		} catch (error) {
 			toast.error("Algo salió mal.");
 		} finally {
-			setLoding(false);
+			setLoading(false);
 		}
 	};
 
 	const onDelete = async () => {
 		try {
-			setLoding(true);
+			setLoading(true);
 			await axios.delete(
 				`/api/${params.storeId}/carteleras/${params.billboardId}`
 			);
-			router.refresh();
-			router.push("/");
+			router.push(`/${params.storeId}/carteleras`);
 			router.refresh();
 			toast.success("Cartelera eliminada.");
 		} catch (error) {
 			toast.error("Asegúrate de primero eliminar todas las categorías.");
 		} finally {
-			setLoding(false);
+			setLoading(false);
 			setOpen(false);
 		}
 	};
@@ -128,7 +124,7 @@ export const BillboardForm: React.FC<BillboardFormProps> = ({
 						size="icon"
 						onClick={() => setOpen(true)}
 					>
-						<Trash className="h-4 w-4" />
+						<Trash2 className="h-4 w-4" />
 					</Button>
 				)}
 			</div>
@@ -184,7 +180,6 @@ export const BillboardForm: React.FC<BillboardFormProps> = ({
 					</Button>
 				</form>
 			</Form>
-			<Separator />
 		</>
 	);
 };

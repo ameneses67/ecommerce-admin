@@ -6,8 +6,16 @@ import { useParams, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Heading } from "@/components/ui/heading";
 import { Separator } from "@/components/ui/separator";
+import { DataTable } from "@/components/ui/data-table";
+import { ApiList } from "@/components/ui/api-list";
 
-export const BillboardClient = () => {
+import { BillboardColumn, columns } from "./columns";
+
+interface BillboardClientProps {
+	data: BillboardColumn[];
+}
+
+export const BillboardClient: React.FC<BillboardClientProps> = ({ data }) => {
 	const router = useRouter();
 	const params = useParams();
 
@@ -15,8 +23,8 @@ export const BillboardClient = () => {
 		<>
 			<div className="flex items-center justify-between">
 				<Heading
-					title="Cartelera (0)"
-					description="Gestiona la cartelera de tu tienda"
+					title={`Carteleras (${data.length})`}
+					description="Gestiona las carteleras de tu tienda"
 				/>
 				<Button
 					onClick={() => router.push(`/${params.storeId}/carteleras/nueva`)}
@@ -26,6 +34,20 @@ export const BillboardClient = () => {
 				</Button>
 			</div>
 			<Separator />
+			<DataTable
+				columns={columns}
+				data={data}
+				searchKey="label"
+			/>
+			<Heading
+				title="API"
+				description="Llamadas API para las carteleras"
+			/>
+			<Separator />
+			<ApiList
+				entityName="carteleras"
+				entityIdName="carteleraId"
+			/>
 		</>
 	);
 };
