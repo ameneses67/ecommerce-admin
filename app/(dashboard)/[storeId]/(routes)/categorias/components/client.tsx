@@ -9,13 +9,13 @@ import { Separator } from "@/components/ui/separator";
 import { DataTable } from "@/components/ui/data-table";
 import { ApiList } from "@/components/ui/api-list";
 
-import { BillboardColumn, columns } from "./columns";
+import { CategoryColumn, columns } from "./columns";
 
-interface BillboardClientProps {
-	data: BillboardColumn[];
+interface CategoryClientProps {
+	data: CategoryColumn[];
 }
 
-export const BillboardClient: React.FC<BillboardClientProps> = ({ data }) => {
+export const CategoryClient: React.FC<CategoryClientProps> = ({ data }) => {
 	const router = useRouter();
 	const params = useParams();
 
@@ -23,11 +23,11 @@ export const BillboardClient: React.FC<BillboardClientProps> = ({ data }) => {
 		<>
 			<div className="flex items-center justify-between">
 				<Heading
-					title={`Carteleras (${data.length})`}
-					description="Gestiona las carteleras de tu tienda"
+					title={`Categorías (${data.length})`}
+					description="Gestiona las categorías de tu tienda"
 				/>
 				<Button
-					onClick={() => router.push(`/${params.storeId}/carteleras/nueva`)}
+					onClick={() => router.push(`/${params.storeId}/categorias/nueva`)}
 				>
 					<Plus className="mr-2 w-4 h-4" />
 					Agregar
@@ -37,16 +37,16 @@ export const BillboardClient: React.FC<BillboardClientProps> = ({ data }) => {
 			<DataTable
 				columns={columns}
 				data={data}
-				searchKey="label"
+				searchKey="name"
 			/>
 			<Heading
 				title="API"
-				description="Rutas API para las carteleras"
+				description="Rutas API para las categorías"
 			/>
 			<Separator />
 			<ApiList
-				entityName="carteleras"
-				entityIdName="carteleraId"
+				entityName="categorias"
+				entityIdName="categoriaId"
 			/>
 		</>
 	);
