@@ -10,11 +10,13 @@ export async function POST(req: Request) {
 		const { name } = body;
 
 		if (!userId) {
-			return new NextResponse("Sin autorización", { status: 401 });
+			return new NextResponse("No autenticado", { status: 401 });
 		}
 
 		if (!name) {
-			return new NextResponse("El nombre es requerido", { status: 400 });
+			return new NextResponse("El nombre de la tienda es requerido", {
+				status: 400,
+			});
 		}
 
 		const store = await prismadb.store.create({

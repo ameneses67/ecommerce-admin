@@ -13,11 +13,13 @@ export async function POST(
 		const { name, billboardId } = body;
 
 		if (!userId) {
-			return new NextResponse("Inicia sesión primero", { status: 401 });
+			return new NextResponse("No autenticado", { status: 401 });
 		}
 
 		if (!name) {
-			return new NextResponse("El nombre es requerido", { status: 400 });
+			return new NextResponse("El nombre de la categoría es requerido", {
+				status: 400,
+			});
 		}
 
 		if (!billboardId) {
@@ -38,7 +40,7 @@ export async function POST(
 		});
 
 		if (!storeByUserId) {
-			return new NextResponse("No tienes permiso para modificar esta tienda", {
+			return new NextResponse("No autorizado", {
 				status: 403,
 			});
 		}

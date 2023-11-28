@@ -10,20 +10,20 @@ export async function POST(
 	try {
 		const { userId } = auth();
 		const body = await req.json();
-		const { label, imageUrl } = body;
+		const { name, value } = body;
 
 		if (!userId) {
 			return new NextResponse("No autenticado", { status: 401 });
 		}
 
-		if (!label) {
-			return new NextResponse("El nombre de la cartelera es requerido", {
+		if (!name) {
+			return new NextResponse("El nombre de la talla es requerido", {
 				status: 400,
 			});
 		}
 
-		if (!imageUrl) {
-			return new NextResponse("La imagen de la cartelera es requerida", {
+		if (!value) {
+			return new NextResponse("El tamaño de la talla es requerido", {
 				status: 400,
 			});
 		}
@@ -47,17 +47,17 @@ export async function POST(
 			});
 		}
 
-		const billboard = await prismadb.billboard.create({
+		const size = await prismadb.size.create({
 			data: {
-				label,
-				imageUrl,
+				name,
+				value,
 				storeId: params.storeId,
 			},
 		});
 
-		return NextResponse.json(billboard);
+		return NextResponse.json(size);
 	} catch (error) {
-		console.log("[BILLBOARDS_POST]", error);
+		console.log("[SIZES_POST]", error);
 		return new NextResponse("Internal error", { status: 500 });
 	}
 }
@@ -73,15 +73,15 @@ export async function GET(
 			});
 		}
 
-		const billboards = await prismadb.billboard.findMany({
+		const sizes = await prismadb.size.findMany({
 			where: {
 				storeId: params.storeId,
 			},
 		});
 
-		return NextResponse.json(billboards);
+		return NextResponse.json(sizes);
 	} catch (error) {
-		console.log("[BILLBOARDS_GET]", error);
+		console.log("[SIZES_GET]", error);
 		return new NextResponse("Internal error", { status: 500 });
 	}
 }

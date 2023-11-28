@@ -38,7 +38,7 @@ export async function PATCH(
 		const { name, billboardId } = body;
 
 		if (!userId) {
-			return new NextResponse("Inicia sesión primero", { status: 401 });
+			return new NextResponse("No autenticado", { status: 401 });
 		}
 
 		if (!name) {
@@ -65,7 +65,7 @@ export async function PATCH(
 		});
 
 		if (!storeByUserId) {
-			return new NextResponse("No tienes permiso para modificar esta tienda", {
+			return new NextResponse("No autorizado", {
 				status: 403,
 			});
 		}
@@ -95,7 +95,7 @@ export async function DELETE(
 		const { userId } = auth();
 
 		if (!userId) {
-			return new NextResponse("Inicia sesión primero", { status: 401 });
+			return new NextResponse("No autenticado", { status: 401 });
 		}
 
 		if (!params.categoryId) {
@@ -112,7 +112,7 @@ export async function DELETE(
 		});
 
 		if (!storeByUserId) {
-			return new NextResponse("No tienes permiso para modificar esta tienda", {
+			return new NextResponse("No autorizado", {
 				status: 403,
 			});
 		}
