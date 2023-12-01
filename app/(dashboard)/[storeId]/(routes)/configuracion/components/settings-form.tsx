@@ -1,6 +1,6 @@
 "use client";
 
-import { Trash } from "lucide-react";
+import { Trash2 } from "lucide-react";
 import { Store } from "@prisma/client";
 import { z } from "zod";
 import { useState } from "react";
@@ -66,13 +66,12 @@ export const SettingsForm: React.FC<SettingsFormProps> = ({ initialData }) => {
 		try {
 			setLoding(true);
 			await axios.delete(`/api/stores/${params.storeId}`);
-			router.refresh();
 			router.push("/");
 			router.refresh();
 			toast.success("Tienda eliminada.");
 		} catch (error) {
 			toast.error(
-				"Asegúrate de primero eliminar todos los productos y categorías."
+				"Asegúrate de primero eliminar todos los productos y categorías de la tienda."
 			);
 		} finally {
 			setLoding(false);
@@ -91,7 +90,7 @@ export const SettingsForm: React.FC<SettingsFormProps> = ({ initialData }) => {
 			<div className="flex items-center justify-between">
 				<Heading
 					title="Configuración"
-					description="Gestionar las preferencias de la tienda"
+					description="Gestiona las preferencias de tu tienda"
 				/>
 				<Button
 					disabled={loading}
@@ -99,7 +98,7 @@ export const SettingsForm: React.FC<SettingsFormProps> = ({ initialData }) => {
 					size="icon"
 					onClick={() => setOpen(true)}
 				>
-					<Trash className="h-4 w-4" />
+					<Trash2 className="h-4 w-4" />
 				</Button>
 			</div>
 			<Separator />
@@ -114,7 +113,7 @@ export const SettingsForm: React.FC<SettingsFormProps> = ({ initialData }) => {
 							name="name"
 							render={({ field }) => (
 								<FormItem>
-									<FormLabel>Nombre</FormLabel>
+									<FormLabel>Tienda</FormLabel>
 									<FormControl>
 										<Input
 											disabled={loading}

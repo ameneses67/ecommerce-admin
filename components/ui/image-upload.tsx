@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { ImagePlus, Trash } from "lucide-react";
+import { ImagePlus, Trash2 } from "lucide-react";
 import { CldUploadWidget } from "next-cloudinary";
 
 import { Button } from "@/components/ui/button";
@@ -49,7 +49,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
 								variant="destructive"
 								size="icon"
 							>
-								<Trash className="h-4 w-4" />
+								<Trash2 className="h-4 w-4" />
 							</Button>
 						</div>
 						<Image
