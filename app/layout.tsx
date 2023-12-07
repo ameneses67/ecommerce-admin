@@ -5,6 +5,7 @@ import { esES } from "@clerk/localizations";
 
 import { ModalProvider } from "@/providers/modal-provider";
 import { ToasterProvider } from "@/providers/toast-provider";
+import { ThemeProvider } from "@/providers/theme-provider";
 
 import "./globals.css";
 
@@ -24,9 +25,16 @@ export default function RootLayout({
 		<ClerkProvider localization={esES}>
 			<html lang="es">
 				<body className={inter.className}>
-					<ToasterProvider />
-					<ModalProvider />
-					{children}
+					<ThemeProvider
+						attribute="class"
+						defaultTheme="system"
+						enableSystem
+						disableTransitionOnChange
+					>
+						<ToasterProvider />
+						<ModalProvider />
+						{children}
+					</ThemeProvider>
 				</body>
 			</html>
 		</ClerkProvider>
