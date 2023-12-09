@@ -29,7 +29,7 @@ const Overview: React.FC<OverviewProps> = ({ data }) => {
 				/>
 				<Bar
 					dataKey="total"
-					fill="#3498db"
+					fill="#e11d48"
 					radius={[4, 4, 0, 0]}
 				/>
 			</BarChart>
